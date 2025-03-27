@@ -14,7 +14,7 @@
 
 {{ "<!-- plugins -->" | safeHTML }}
 {{ range .Site.Params.plugins.css }}
-  {{ $css := resources.Get .URL | resources.PostCSS }}
+  {{ $css := resources.Get .URL | css.PostCSS }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" media="print" onload="this.onload=null;this.removeAttribute('media');">
 {{ end }}
 

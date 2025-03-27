@@ -4,7 +4,7 @@ command = "npm run build"
 # Default site wide settings
 
 [context.production.environment]
-HUGO_VERSION = "0.110.0"
+HUGO_VERSION = "0.136.0"
 HUGO_ENV = "production"
 HUGO_ENABLEGITINFO = "true"
 
@@ -12,20 +12,20 @@ HUGO_ENABLEGITINFO = "true"
 command = "npm run build"
 
 [context.split1.environment]
-HUGO_VERSION = "0.110.0"
+HUGO_VERSION = "0.136.0"
 HUGO_ENV = "production"
 
 [context.deploy-preview]
 command = "npm run build"
 
 [context.deploy-preview.environment]
-HUGO_VERSION = "0.110.0"
+HUGO_VERSION = "0.136.0"
 
 [context.branch-deploy]
 command = "npm run build"
 
 [context.branch-deploy.environment]
-HUGO_VERSION = "0.110.0"
+HUGO_VERSION = "0.136.0"
 # If skip_processing = true, all other settings are ignored
 [build.processing]
 skip_processing = false
