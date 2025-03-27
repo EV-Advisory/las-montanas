@@ -5,7 +5,7 @@
   
   {{ $videoPath := resources.Get .bgVideoIos}} <!-- Assuming bgVideo is the key in your config for video file -->
   {{ if $videoPath }}
-    <video class="hero-video" autoplay loop muted playsinline>
+    <video class="hero-video" autoplay loop muted playsinline poster="{{ .bgImage | absURL }}">
       <source src="{{ $videoPath.RelPermalink }}" type="video/mp4">
       <!-- Fallback Image if video is not supported -->
       <img src="{{ .bgImage | absURL }}" alt="hero-image" class="fallback-img">
@@ -14,20 +14,54 @@
     {{$bgPath := .bgImage}}
     {{ $bgImage := resources.GetMatch $bgPath }}
     {{ if $bgImage }}
-      {{ $webpImage320 := ($bgImage.Fill "320x178 webp q90") }}
-      {{ $webpImage480 := ($bgImage.Fill "480x268 webp q90")}}
-      {{ $webpImage800 := ($bgImage.Fill "800x446 webp q90") }}
+      {{ $heroWidth := 1920 }}
+      {{ $heroHeight := 1080 }}
+      
+      {{ $webpImage320 := ($bgImage.Resize "320x webp q80") }}
+      {{ $webpImage480 := ($bgImage.Resize "480x webp q80") }}
+      {{ $webpImage800 := ($bgImage.Resize "800x webp q85") }}
+      {{ $webpImage1200 := ($bgImage.Resize "1200x webp q85") }}
+      {{ $webpImage1920 := ($bgImage.Resize "1920x webp q90") }}
 
-      <img class="img-responsive" srcset="
-      {{ $webpImage320.RelPermalink }} 320w,
-      {{ $webpImage480.RelPermalink }} 480w,
-      {{ $webpImage800.RelPermalink }} 800w"
-      sizes="(max-width: 320px) 280px,
-             (max-width: 480px) 440px,
-             800px"
-      src="{{ $bgImage.RelPermalink }}" alt="hero-image">
+      {{ $jpgImage320 := ($bgImage.Resize "320x jpg q80") }}
+      {{ $jpgImage480 := ($bgImage.Resize "480x jpg q80") }}
+      {{ $jpgImage800 := ($bgImage.Resize "800x jpg q85") }}
+      {{ $jpgImage1200 := ($bgImage.Resize "1200x jpg q85") }}
+      {{ $jpgImage1920 := ($bgImage.Resize "1920x jpg q90") }}
+
+      <link rel="preload" href="{{ $webpImage1200.RelPermalink }}" as="image">
+
+      <picture>
+        <source type="image/webp" 
+                srcset="{{ $webpImage320.RelPermalink }} 320w, 
+                        {{ $webpImage480.RelPermalink }} 480w, 
+                        {{ $webpImage800.RelPermalink }} 800w,
+                        {{ $webpImage1200.RelPermalink }} 1200w,
+                        {{ $webpImage1920.RelPermalink }} 1920w"
+                sizes="100vw">
+        <source type="image/jpeg"
+                srcset="{{ $jpgImage320.RelPermalink }} 320w,
+                        {{ $jpgImage480.RelPermalink }} 480w,
+                        {{ $jpgImage800.RelPermalink }} 800w,
+                        {{ $jpgImage1200.RelPermalink }} 1200w,
+                        {{ $jpgImage1920.RelPermalink }} 1920w"
+                sizes="100vw">
+        <img class="img-responsive" 
+             src="{{ $jpgImage1200.RelPermalink }}" 
+             alt="hero-image"
+             width="{{ $heroWidth }}"
+             height="{{ $heroHeight }}"
+             loading="eager"
+             fetchpriority="high"
+             decoding="async">
+      </picture>
     {{ else }}
-      <img class="img-responsive" src="{{ .bgImage | absURL }}" alt="hero-image">
+      <img class="img-responsive" 
+           src="{{ .bgImage | absURL }}" 
+           alt="hero-image"
+           loading="eager"
+           fetchpriority="high"
+           decoding="async">
     {{ end }}
   {{ end }}
 </section>
