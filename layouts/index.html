@@ -1,19 +1,72 @@
-{{ define "main" }}
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-us{{ end }}">
+<head>
+	{{ partial "head.html" . }}
+</head>
+<body id="body">
+    <!-- Preload important first view content -->
+    {{ if .Site.Data.homepage.heroArea.enable }}
+    {{ if not (isset .Site.Data.homepage.heroArea "bgVideoIos") }}
+    {{ with .Site.Data.homepage.heroArea }}
+    <link rel="preload" fetchpriority="high" as="image" href="{{ .bgImage | absURL }}" type="image/jpeg">
+    {{ end }}
+    {{ end }}
+    {{ end }}
 
-{{ partial "hero-area.html" . }}
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to main content</a>
 
-{{- partial "header.html" . -}}
+    {{ partial "header.html" . }}
+    
+    <main id="main-content">
+        {{ partial "hero-area.html" . }}
+        
+        {{ partial "gallery.html" . }}
+        
+        {{ partial "about.html" . }}
 
-{{ partial "gallery.html" . }}
+        {{ partial "blog.html" . }}
 
-{{ partial "about.html" . }}
+        {{ partial "pricing.html" . }}
 
-{{ partial "blog.html" . }}
+        {{ partial "subscription.html" . }}
 
-{{ partial "pricing.html" . }}
+        {{ partial "contact.html" . }}
+    </main>
 
-{{ partial "subscription.html" . }}
-
-{{ partial "contact.html" . }}
-
-{{ end }}
+    {{ partial "footer.html" . }}
+    
+    <!-- Add performance metrics collection -->
+    <script>
+    if (window.performance) {
+      // Create a performance mark after content is loaded
+      window.addEventListener('load', function() {
+        if (performance.mark) {
+          performance.mark('page_loaded');
+        }
+        
+        // Report to analytics if available
+        if (window.ga && performance.getEntriesByType) {
+          const paintMetrics = performance.getEntriesByType('paint');
+          for (const metric of paintMetrics) {
+            if (metric.name === 'first-contentful-paint') {
+              ga('send', 'timing', 'Performance', 'First Contentful Paint', Math.round(metric.startTime));
+            }
+          }
+          
+          // Report LCP if available
+          let lcpTime = 0;
+          new PerformanceObserver((entryList) => {
+            const entries = entryList.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            lcpTime = lastEntry.startTime;
+            if (window.ga) {
+              ga('send', 'timing', 'Performance', 'Largest Contentful Paint', Math.round(lcpTime));
+            }
+          }).observe({type: 'largest-contentful-paint', buffered: true});
+        }
+      });
+    }
+    </script>
+</body>
+</html>

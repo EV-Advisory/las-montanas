@@ -4,9 +4,13 @@ languageCode = "en-us"
 title = "Las Montañas Inn | Wellness Travel Destination in Rural Majestic Colombia"
 theme = "restaurant-hugo"
 summaryLength = "7"
-paginate = 8
+[pagination]
+  pagerSize = 8
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$","\\.knit\\.md$", "\\.utf8\\.md$", "_cache$"]
-googleAnalytics = "UA-81176691-4"
+# googleAnalytics = "UA-81176691-4"
+[services.googleAnalytics]
+  ID = "G-6HTTDT4C8B" # Replace with your actual GA4 measurement ID
+  anonymizeIP = true
 staticDir = ["assets"]
 #defaultContentLanguage = "en"
 ############################# Plugins ##############################

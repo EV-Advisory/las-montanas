@@ -8,21 +8,51 @@
                     <h1 class="heading wow fadeInUp" data-wow-duration="400ms" data-wow-delay="500ms">{{ .title | markdownify }}</h1>
                     {{ $image := resources.GetMatch .image }}
                     {{ if $image }}
-                      {{ $webpImage320 := ($image.Fill "320x178 webp q90") }}
-                      {{ $webpImage480 := ($image.Fill "480x268 webp q90") }}
+                      {{ $imageWidth := 800 }}
+                      {{ $imageHeight := 446 }}
+                      {{ $webpImage320 := ($image.Fill "320x178 webp q80") }}
+                      {{ $webpImage480 := ($image.Fill "480x268 webp q85") }}
                       {{ $webpImage800 := ($image.Fill "800x446 webp q90") }}
-                      <img class="img-responsive mx-auto" srcset="
-                      {{ $webpImage320.RelPermalink }} 320w,
-                      {{ $webpImage480.RelPermalink }} 480w,
-                      {{ $webpImage800.RelPermalink }} 800w"
-                      sizes="(max-width: 320px) 320px,
-                             (max-width: 480px) 480px,
-                             800px"
-                      src="{{ $webpImage800.RelPermalink }}" alt="Logo">
+                      
+                      {{ $jpgImage320 := ($image.Fill "320x178 jpg q80") }}
+                      {{ $jpgImage480 := ($image.Fill "480x268 jpg q85") }}
+                      {{ $jpgImage800 := ($image.Fill "800x446 jpg q90") }}
+
+                      <link rel="preload" href="{{ $webpImage800.RelPermalink }}" as="image">
+                      
+                      <picture>
+                        <source type="image/webp" 
+                                srcset="{{ $webpImage320.RelPermalink }} 320w, 
+                                        {{ $webpImage480.RelPermalink }} 480w, 
+                                        {{ $webpImage800.RelPermalink }} 800w"
+                                sizes="(max-width: 320px) 320px, 
+                                       (max-width: 480px) 480px, 
+                                       800px">
+                        <source type="image/jpeg"
+                                srcset="{{ $jpgImage320.RelPermalink }} 320w,
+                                        {{ $jpgImage480.RelPermalink }} 480w,
+                                        {{ $jpgImage800.RelPermalink }} 800w"
+                                sizes="(max-width: 320px) 320px,
+                                       (max-width: 480px) 480px,
+                                       800px">
+                        <img class="img-responsive mx-auto" 
+                             src="{{ $jpgImage800.RelPermalink }}" 
+                             alt="{{ .title }}"
+                             width="{{ $imageWidth }}"
+                             height="{{ $imageHeight }}"
+                             loading="eager"
+                             fetchpriority="high"
+                             decoding="async">
+                      </picture>
                     {{ else }}
-                      <img class="img-responsive mx-auto" src="{{ .image | absURL }}" alt="Logo"/>
+                      <img class="img-responsive mx-auto" 
+                           src="{{ .image | absURL }}" 
+                           alt="{{ .title }}"
+                           loading="eager"
+                           fetchpriority="high"
+                           decoding="async">
                     {{ end }}
-                    <p class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="600ms" style = "padding-bottom:5px">{{ .description | markdownify }}</p>
+                    <p class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="600ms" style="padding-bottom:5px">{{ .description | markdownify }}</p>
                 </div>
             </div>
         </div>
