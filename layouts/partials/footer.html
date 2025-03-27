@@ -113,11 +113,45 @@
     </div>
 </footer>
 
+{{ "<!-- Essential JS Plugins -->" | safeHTML }}
+<script>
+// Inline small utility functions for performance
+document.addEventListener('DOMContentLoaded', function() {
+  // Helper function to load scripts asynchronously
+  function loadScript(src, async, defer) {
+    var script = document.createElement('script');
+    script.src = src;
+    if (async) script.async = true;
+    if (defer) script.defer = true;
+    document.body.appendChild(script);
+  }
+  
+  // Initialize lazy loading for images that appear later
+  if ('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    images.forEach(img => {
+      if (img.dataset.src) {
+        img.src = img.dataset.src;
+      }
+    });
+  } else {
+    // Fallback for browsers that don't support native lazy loading
+    loadScript('/js/lazysizes.min.js', true, true);
+  }
+});
+</script>
 
-{{ "<!-- JS Plugins -->" | safeHTML }}
+{{ "<!-- Load critical scripts immediately -->" | safeHTML }}
+<script src="{{ "js/jquery.min.js" | absURL }}"></script>
+
+{{ "<!-- Defer non-critical scripts -->" | safeHTML }}
 {{ range .Site.Params.plugins.js}}
-  {{ if or (eq  .URL "main.js")  (eq  .URL "jquery.min.js") }} <script src="{{ .URL | absURL }}"></script>
-  {{ else }} <script src="{{ .URL | absURL }}" defer></script>
+  {{ if eq .URL "jquery.min.js" }}
+    <!-- jQuery already loaded above -->
+  {{ else if eq .URL "main.js" }}
+    <script src="{{ .URL | absURL }}"></script>
+  {{ else }}
+    <script src="{{ .URL | absURL }}" defer></script>
   {{ end }}
 {{ end }}
 

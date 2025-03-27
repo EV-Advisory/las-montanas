@@ -1,12 +1,18 @@
 [build]
 publish = "public"
-command = "npm run build"
-# Default site wide settings
+command = "npm run build:netlify"
+
+[build.environment]
+NODE_OPTIONS = "--max_old_space_size=4096"
+SHARP_MEMORY_ALLOCATION = "512"
+SHARP_CONCURRENCY = "1"
+NODE_ENV = "production"
 
 [context.production.environment]
 HUGO_VERSION = "0.136.0"
 HUGO_ENV = "production"
 HUGO_ENABLEGITINFO = "true"
+NODE_OPTIONS = "--max_old_space_size=4096"
 
 [context.split1]
 command = "npm run build"
@@ -30,15 +36,15 @@ HUGO_VERSION = "0.136.0"
 [build.processing]
 skip_processing = false
 [build.processing.css]
-bundle = false
-minify = false
+bundle = true
+minify = true
 [build.processing.js]
-bundle = false
-minify = false
+bundle = true
+minify = true
 [build.processing.html]
-pretty_urls = false
+pretty_urls = true
 [build.processing.images]
-compress = false
+compress = true
 
 
 [context.next.environment]
@@ -51,18 +57,72 @@ HUGO_ENABLEGITINFO = "true"
   minify = true
   
 [[headers]]
-  for = "/*.jpg"
+  for = "/*"
   [headers.values]
-    Cache-Control = "public, s-max-age=2592000"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+
 [[headers]]
   for = "/*.css"
   [headers.values]
-    Cache-Control = "public, s-max-age=604800"
+    Cache-Control = "public, max-age=31536000, immutable"
+
 [[headers]]
   for = "/*.js"
   [headers.values]
-    Cache-Control = "public, s-max-age=604800"
+    Cache-Control = "public, max-age=31536000, immutable"
+
 [[headers]]
-  for = "/*"
+  for = "/*.jpg"
   [headers.values]
-    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.ttf"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirect rules
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  conditions = {Language = ["en"], Country = ["US"], Role = ["admin"]}
+
+# Custom build plugins
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+  [plugins.inputs.thresholds]
+    performance = 0.9
+    accessibility = 0.9
+    best-practices = 0.9
+    seo = 0.9
