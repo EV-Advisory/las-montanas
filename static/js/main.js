@@ -73,8 +73,6 @@ $(document).ready(function () {
         }
     });
 
-     document.getElementById(elmId).innerHTML = value;
-
     //Initiat WOW JS
     new WOW().init();
 
