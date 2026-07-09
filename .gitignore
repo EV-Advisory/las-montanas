@@ -43,3 +43,6 @@ vignettes/*.pdf
 rsconnect/
 
 Dockerfile
+
+# AI-tool scaffolding
+.cursor/
