@@ -46,3 +46,4 @@ Dockerfile
 
 # AI-tool scaffolding
 .cursor/
+.codegraph/
