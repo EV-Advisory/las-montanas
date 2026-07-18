@@ -47,3 +47,10 @@ Dockerfile
 # AI-tool scaffolding
 .cursor/
 .codegraph/
+hours-report*.xlsx
+**/data/time/*.xlsx
+**/time/*.xlsx
+AGENTS.md
+AGENTS.MD
+CLAUDE.md
+GEMINI.md
