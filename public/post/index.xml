@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Las Montañas Inn | Wellness Travel Destination in Rural Majestic Colombia</title>
+    <link>//localhost:1313/post/</link>
+    <description>Recent content in Posts on Las Montañas Inn | Wellness Travel Destination in Rural Majestic Colombia</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Jan 2024 00:23:59 -0500</lastBuildDate>
+    <atom:link href="//localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>#santabarbara</title>
+      <link>//localhost:1313/post/santa-barbara/</link>
+      <pubDate>Mon, 15 Jan 2024 00:23:59 -0500</pubDate>
+      <guid>//localhost:1313/post/santa-barbara/</guid>
+      <description>:church: the balcony of Antioquia</description>
+    </item>
+    <item>
+      <title>#hiking</title>
+      <link>//localhost:1313/post/hiking/</link>
+      <pubDate>Fri, 12 Jan 2024 00:23:59 -0500</pubDate>
+      <guid>//localhost:1313/post/hiking/</guid>
+      <description>Blaze a trail through Antioquia</description>
+    </item>
+    <item>
+      <title>#tours</title>
+      <link>//localhost:1313/post/tours/</link>
+      <pubDate>Fri, 12 Jan 2024 00:23:59 -0500</pubDate>
+      <guid>//localhost:1313/post/tours/</guid>
+      <description>:castle: Historic landmarks</description>
+    </item>
+    <item>
+      <title>#coffee #panela</title>
+      <link>//localhost:1313/post/coffee-panela/</link>
+      <pubDate>Wed, 10 Jan 2024 00:23:59 -0500</pubDate>
+      <guid>//localhost:1313/post/coffee-panela/</guid>
+      <description>:coffee: served and how it&amp;rsquo;s made</description>
+    </item>
+    <item>
+      <title>#paisaculture</title>
+      <link>//localhost:1313/post/paisa-culture/</link>
+      <pubDate>Wed, 10 Jan 2024 00:23:59 -0500</pubDate>
+      <guid>//localhost:1313/post/paisa-culture/</guid>
+      <description>A Glimpse into Antioquia&amp;rsquo;s Soul</description>
+    </item>
+    <item>
+      <title>#paragliding</title>
+      <link>//localhost:1313/post/paragliding/</link>
+      <pubDate>Thu, 04 Jan 2024 00:23:59 -0500</pubDate>
+      <guid>//localhost:1313/post/paragliding/</guid>
+      <description>Soar like a bird through the Andes</description>
+    </item>
+    <item>
+      <title>Hilltop Weddings</title>
+      <link>//localhost:1313/post/hilltop-wedding/</link>
+      <pubDate>Sat, 04 Jan 2020 00:25:54 -0500</pubDate>
+      <guid>//localhost:1313/post/hilltop-wedding/</guid>
+      <description>Say &amp;ldquo;I Do&amp;rdquo; from the clouds</description>
+    </item>
+    <item>
+      <title>Must See: Santa Barbara</title>
+      <link>//localhost:1313/post/must-see-santa-barbara/</link>
+      <pubDate>Sat, 04 Jan 2020 00:25:54 -0500</pubDate>
+      <guid>//localhost:1313/post/must-see-santa-barbara/</guid>
+      <description>Ecological paradise outside of Medellin</description>
+    </item>
+    <item>
+      <title>Planning a Getaway</title>
+      <link>//localhost:1313/post/planning-a-getaway/</link>
+      <pubDate>Sat, 04 Jan 2020 00:25:54 -0500</pubDate>
+      <guid>//localhost:1313/post/planning-a-getaway/</guid>
+      <description>Mountain escape in Colombia</description>
+    </item>
+    <item>
+      <title>Gourmet Meals</title>
+      <link>//localhost:1313/post/gourmet-meals/</link>
+      <pubDate>Sat, 04 Jan 2020 00:23:59 -0500</pubDate>
+      <guid>//localhost:1313/post/gourmet-meals/</guid>
+      <description>In-house traditional colombian cuisine</description>
+    </item>
+    <item>
+      <title>Travel Arrangements</title>
+      <link>//localhost:1313/post/travel-arrangements/</link>
+      <pubDate>Wed, 01 Jan 2020 00:25:54 -0500</pubDate>
+      <guid>//localhost:1313/post/travel-arrangements/</guid>
+      <description>Arriving at your destination</description>
+    </item>
+  </channel>
+</rss>
